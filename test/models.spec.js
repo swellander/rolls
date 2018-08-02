@@ -58,6 +58,14 @@ describe('db methods', () => {
     const userArr = await db.getUsersByRole('Marine');
     expect(userArr.length).to.equal(1);
   })
+  it('can get an array of all users and their roles', () => {
+    db.getAllUsersAndRoles()
+      .then(arr => {
+        expect(arr.length).to.eql(2);
+        expect(arr[0].role.name).to.equal('Homie');
+      })
+      .catch(console.log);
+  })
 })
 
 

@@ -49,9 +49,20 @@ db.addUserWithRole = async (userName, roleName) => {
 db.getUsersByRole = async (role) => {
   try {
     const users = await User.findAll({
-      include: [Role] 
+      include: [{
+        model: Role,
+        where: { name: role }
+      }] 
     }); 
     return users;
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+db.getAllUsersAndRoles = async () => {
+  try {
+    return await User.findAll({include: [Role]});
   } catch(err) {
     console.log(err);
   }
